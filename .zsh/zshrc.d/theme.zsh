@@ -1,0 +1,1 @@
+themes/qlimax/qlimax.zsh-theme
