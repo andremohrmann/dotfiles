@@ -60,7 +60,7 @@ prompt_segment() {
   if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
     echo -n " %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
   else
-    echo -n "%{$bg%}%{$fg%} "
+    echo -n "%{$bg%}%{$fg%}"
   fi
   CURRENT_BG=$1
   [[ -n $3 ]] && echo -n $3
@@ -70,7 +70,7 @@ prompt_segment() {
 prompt_end() {
   _newline=$'\n'
   if [[ -n $CURRENT_BG ]]; then
-    echo -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR${_newline}%{%k%F{$CLEAN_BG}%}#"
+    echo -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR${_newline}%{%k%F{$CLEAN_BG}%}└╼#"
   else
     echo -n "%{%k%}"
   fi
@@ -90,6 +90,7 @@ prompt_context() {
 
 # Git: branch/detached head, dirty status
 prompt_git() {
+
   local PL_BRANCH_CHAR
   () {
     local LC_ALL="" LC_CTYPE="en_US.UTF-8"
@@ -100,8 +101,8 @@ prompt_git() {
   repo_path=$(git rev-parse --git-dir 2>/dev/null)
 
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
-    dirty=$(parse_git_dirty)
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git rev-parse --short HEAD 2> /dev/null)"
+    #dirty=$(parse_git_dirty)
+   ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git rev-parse --short HEAD 2> /dev/null)"
     if [[ -n $dirty ]]; then
       prompt_segment yellow black
     else
@@ -187,9 +188,9 @@ prompt_virtualenv() {
 prompt_status() {
   local symbols
   symbols=()
-#  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
-  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
-  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
+#  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}┌─╼ ✘ "
+  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}┌─╼ ⚡ "
+  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}┌─╼ ⚙ "
 
   [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
 }
@@ -200,9 +201,50 @@ prompt_time() {
   prompt_segment black default "$time"
 }
 
+printSizeHumanReadable() {
+  typeset -F 2 size
+  size="$1"+0.00001
+  local extension
+  extension=('B' 'K' 'M' 'G' 'T' 'P' 'E' 'Z' 'Y')
+  local index=1
+
+  # if the base is not Bytes
+  if [[ -n $2 ]]; then
+    for idx in "${extension[@]}"; do
+      if [[ "$2" == "$idx" ]]; then
+        break
+      fi
+      index=$(( index + 1 ))
+    done
+  fi
+
+  while (( (size / 1024) > 0.1 )); do
+    size=$(( size / 1024 ))
+    index=$(( index + 1 ))
+  done
+
+  echo "$size${extension[$index]}"
+}
+
+prompt_ram() {
+  local base=''
+  local ramfree=0
+  if [[ "$OS" == "OSX" ]]; then
+    ramfree=$(vm_stat | grep "Pages free" | grep -o -E '[0-9]+')
+    # Convert pages into Bytes
+    ramfree=$(( ramfree * 4096 ))
+  else
+    ramfree=$(grep -o -E "MemFree:\s+[0-9]+" /proc/meminfo | grep -o "[0-9]*")
+    base='K'
+  fi
+
+  prompt_segment black default "Free RAM: $(printSizeHumanReadable "$ramfree" $base)" 'RAM_ICON'
+}
+
 # Right prompt
 build_rprompt() {
   prompt_time
+#  prompt_ram
 }
 
 # Main prompt
