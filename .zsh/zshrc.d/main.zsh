@@ -40,7 +40,7 @@ setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
-setopt share_history
+#setopt share_history
 
 ##################
 ### Keybinding ###
@@ -332,7 +332,9 @@ else
     echo "Quote function needs curl to work..." >&2
 fi
 
-
+function all_the_colors {
+  for x in 0 1 4 5 7 8; do for i in `seq 30 37`; do for a in `seq 40 47`; do echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; done; echo; done; done; echo "";
+}
 
 
 
