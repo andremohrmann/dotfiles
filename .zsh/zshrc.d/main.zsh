@@ -125,6 +125,12 @@ alias sz='source ~/.zshrc'
 # copy with a progress bar.
 alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 
+# Get directory size
+alias ds='du -h --max-depth=0 $1' # requires one input
+
+# Get directory size of every folder in current directory
+alias dsa='du -h --max-depth=0 *'
+
 # Some more aliases to avoid making mistakes
 alias rm='rm -i'
 alias cp='cp -i'
