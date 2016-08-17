@@ -101,6 +101,17 @@ alias ls='ls $LS_OPTIONS'
 alias ll='ls $LS_OPTIONS -l'
 alias l='ls $LS_OPTIONS -lAhF'
 
+# Easy chmod
+alias 000='chmod 000'
+alias 644='chmod 644'
+alias 664='chmod 664'
+alias 755='chmod 755'
+alias 775='chmod 775'
+
+# Recursively find all files/directories in current directory and chmod them
+alias findf='find . -type f -exec chmod 664 {} \;'
+alias findd='find . -type d -exec chmod 775 {} \;'
+
 # grep beautification
 export GREP_OPTIONS="--colour=auto"
 alias grep='grep $GREP_OPTIONS'
