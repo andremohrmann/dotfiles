@@ -209,6 +209,15 @@ setopt AUTO_CD
 # Make file name completion case-insensitive
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
+####################
+### Welcome user ###
+####################
+
+# Print date, time and uptime
+echo -ne "\nHello $USER today is "; date
+echo -ne "Uptime for this computer is $fg[cyan]";uptime | awk '{print $3,$4,$5}' | sed s/.$/\ hours/    # Ulgy as fuck sed, also not working properly if uptime is < 1 day
+echo -ne "$reset_color\n"
+
 ############
 ### Misc ###
 ############
