@@ -20,7 +20,7 @@ Login again
 cd ~/dotfiles/
 git pull -q origin master
 # Bypass the "cp -i" alias via "\"
-\cp -ar --force ~/dotfiles/.zsh ~/.zsh
+\cp -ar --force ~/dotfiles/.zsh/ ~/
 \cp -ar --force ~/dotfiles/.zshrc ~/.zshrc
 cd ~/.zsh/zsh-autosuggestions
 git pull -q origin master
