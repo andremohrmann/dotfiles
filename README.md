@@ -1,5 +1,6 @@
 # Install
 ```bash
+apt-get install -y zsh
 git clone https://github.com/andremohrmann/dotfiles.git ~/dotfiles/
 mv ~/dotfiles/.zsh ~/.zsh
 mv ~/dotfiles/.zshrc ~/.zshrc
