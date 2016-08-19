@@ -1,5 +1,5 @@
 #!/bin/bash
-# Run this script as a cron - e.g. "0 4 * * * ~/dotfiles/.zsh/zshrc.d/update.sh"
+# Run this script as a cron - e.g. "0 4 * * * ~/dotfiles/.zsh/update.sh"
 
 cd ~/dotfiles/
 git pull -q origin master
