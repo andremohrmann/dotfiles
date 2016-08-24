@@ -16,6 +16,8 @@ Login again
 
 # Update
 
+Run this as a script via crontab - e.g. "0 4 * * * sh ~/dotfiles/.zsh/update.sh"
+
 ```bash
 cd ~/dotfiles/
 git pull -q origin master
