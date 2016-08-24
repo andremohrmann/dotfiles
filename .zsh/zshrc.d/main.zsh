@@ -235,6 +235,8 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 echo -ne "\nHello $USER today is "; date
 echo -ne "Uptime for this computer is $fg[cyan]";uptime | awk '{print $3,$4,$5}' | sed s/.$/\ hours/    # Ulgy as fuck sed, also not working properly if uptime is < 1 day
 echo -ne "$reset_color\n"
+echo -ne "This server is running on $fg[cyan]";cat /etc/*-release | head -1 | sed 's/PRETTY_NAME=//g'
+echo -ne "$reset_color\n"
 
 ############
 ### Misc ###
