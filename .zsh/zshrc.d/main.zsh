@@ -1,8 +1,8 @@
 # Terminal background
-# RGB: 0 43 54 OR 7 54 66
-# Puttytray settings
-# Putty configfile: puttytray_Default%20Settings.txt
-# Putty colors: https://github.com/andremohrmann/solarized
+# RGB: 0,43,54 OR 7,54,66
+# PuTTYtray settings
+# PuTTYtray configfile: puttytray_Default%20Settings.txt
+# PuTTY colors: https://github.com/andremohrmann/solarized
 
 autoload -Uz compinit promptinit colors && colors
 compinit
