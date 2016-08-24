@@ -233,10 +233,20 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
 # Print date, time and uptime
 echo -ne "\nHello $USER today is "; date
-echo -ne "Uptime for this computer is $fg[cyan]";uptime | awk '{print $3,$4,$5}' | sed s/.$/\ hours/    # Ulgy as fuck sed, also not working properly if uptime is < 1 day
+echo -ne "Uptime for this system is $fg[cyan]";uptime | awk '{print $3,$4,$5}' | sed s/.$/\ hours/    # Ulgy as fuck sed, also not working properly if uptime is < 1 day
 echo -ne "$reset_color\n"
-echo -ne "This server is running on $fg[cyan]";cat /etc/*-release | head -1 | sed 's/PRETTY_NAME=//g'
-echo -ne "$reset_color\n"
+
+# Get OS
+OS=$(cat /etc/*-release | sed -n 5,5p | sed 's/ID=//g')
+
+# If OS is debian print full version, if not just print the OS
+if [ $OS = "debian" ]; then
+  echo -ne "This system is running on $fg[cyan]$(cat /etc/*-release | head -1 | sed 's/PRETTY_NAME=//g')$reset_color Version: $fg[cyan]";cat /etc/debian_version
+  echo -ne "$reset_color\n"
+else
+  echo -ne "This system is running on $fg[cyan]";cat /etc/*-release | head -1 | sed 's/PRETTY_NAME=//g'
+  echo -ne "$reset_color\n"
+fi
 
 ############
 ### Misc ###
