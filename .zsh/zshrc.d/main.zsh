@@ -241,10 +241,10 @@ OS=$(cat /etc/*-release | sed -n 5,5p | sed 's/ID=//g')
 
 # If OS is debian print full version, if not just print the OS
 if [ $OS = "debian" ]; then
-  echo -ne "This system is running on $fg[cyan]$(cat /etc/*-release | head -1 | sed 's/PRETTY_NAME=//g')$reset_color Version: $fg[cyan]";cat /etc/debian_version
+  echo -ne "This system is running on $fg[cyan]$(cat /etc/*-release | sed -n 's/.*\(PRETTY_NAME\=.*\).*/\1/p' | sed 's/PRETTY_NAME=//g')$reset_color Version: $fg[cyan]";cat /etc/debian_version
   echo -ne "$reset_color\n"
 else
-  echo -ne "This system is running on $fg[cyan]";cat /etc/*-release | head -1 | sed 's/PRETTY_NAME=//g'
+  echo -ne "This system is running on $fg[cyan]";cat /etc/*-release | sed -n 's/.*\(PRETTY_NAME\=.*\).*/\1/p' | sed 's/PRETTY_NAME=//g'
   echo -ne "$reset_color\n"
 fi
 
