@@ -34,4 +34,4 @@ git pull -q origin master
 
 Login again
 
-`source ~/.zsh` does not work at the moment due to a bug in _zsh_highlight_widget
+`source ~/.zshrc` does not work at the moment due to a bug in _zsh_highlight_widget
