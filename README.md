@@ -3,8 +3,9 @@
 ```bash
 apt-get install -y zsh
 git clone https://github.com/andremohrmann/dotfiles.git ~/dotfiles/
-cp -ar ~/dotfiles/.zsh ~/.zsh
-cp -ar ~/dotfiles/.zshrc ~/.zshrc
+mkdir ~/.zsh/
+ln -s ~/dotfiles/.zsh/zshrc.d ~/.zsh/zshrc.d
+ln -s ~/dotfiles/.zshrc ~/.zshrc
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
 mkdir ~/.zsh/cache/
@@ -23,9 +24,6 @@ Run this as a script via crontab - e.g.
 ```bash
 cd ~/dotfiles/
 git pull -q origin master
-# Bypass the "cp -i" alias via "\"
-\cp -ar --force ~/dotfiles/.zsh/ ~/
-\cp -ar --force ~/dotfiles/.zshrc ~/.zshrc
 cd ~/.zsh/zsh-autosuggestions
 git pull -q origin master
 cd ~/.zsh/zsh-syntax-highlighting
