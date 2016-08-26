@@ -151,6 +151,14 @@ alias mv='mv -iv'
 
 alias colorize='colorize_via_pygmentize'
 
+# Misc
+alias :q='quit'
+
+# 4 teh lulz
+alias fuck='sudo $(fc -ln -1)'
+alias fucking='sudo '
+alias please='sudio '
+
 #################
 ### Functions ###
 #################
