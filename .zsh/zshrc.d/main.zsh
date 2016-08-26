@@ -139,8 +139,8 @@ alias ducks='du -cksh *'
 
 # Some more aliases to avoid making mistakes
 alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
+alias cp='cp -iv'
+alias mv='mv -iv'
 
 alias colorize='colorize_via_pygmentize'
 
