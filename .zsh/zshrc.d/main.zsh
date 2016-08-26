@@ -141,6 +141,10 @@ alias ducks='du -cksh *'
 # Qiuck acces to history
 alias h='history'
 
+# Easy ps
+alias psa="ps aux"
+alias psg="ps aux | grep "
+
 # Some more aliases to avoid making mistakes
 alias rm='rm -iv'
 alias cp='cp -iv'
