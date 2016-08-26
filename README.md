@@ -5,7 +5,6 @@ apt-get install -y zsh
 git clone https://github.com/andremohrmann/dotfiles.git ~/dotfiles/
 mkdir ~/.zsh/
 ln -s ~/dotfiles/.zsh/zshrc.d ~/.zsh/zshrc.d
-ln -s ~/dotfiles/.zsh/update.sh ~/.zsh/update.sh
 ln -s ~/dotfiles/.zshrc ~/.zshrc
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
