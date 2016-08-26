@@ -119,6 +119,8 @@ alias grep='grep $GREP_OPTIONS'
 
 # Navigation aliases
 alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
 # Shell conveniences
 alias sz='source ~/.zshrc'
