@@ -138,12 +138,11 @@ alias dsa='du -h --max-depth=0 *'
 # Get sizes of everything in current directory and show total
 alias ducks='du -cksh *'
 
-# Qiuck acces to history
-alias h='history'
-
-# Easy ps
+# Commonly used commands
 alias psa="ps aux"
 alias psg="ps aux | grep "
+alias t='tail -f -n 20000'
+alias h='history'
 
 # Some more aliases to avoid making mistakes
 alias rm='rm -iv'
