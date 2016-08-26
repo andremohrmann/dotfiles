@@ -142,7 +142,7 @@ alias ducks='du -cksh *'
 alias h='history'
 
 # Some more aliases to avoid making mistakes
-alias rm='rm -i'
+alias rm='rm -iv'
 alias cp='cp -iv'
 alias mv='mv -iv'
 
