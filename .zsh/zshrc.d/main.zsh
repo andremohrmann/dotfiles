@@ -121,6 +121,7 @@ alias grep='grep $GREP_OPTIONS'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias cd..='cd ..'
 
 # Shell conveniences
 alias sz='source ~/.zshrc'
