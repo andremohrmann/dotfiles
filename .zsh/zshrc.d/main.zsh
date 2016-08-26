@@ -241,7 +241,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 ####################
 
 # Print date, time and uptime
-echo -ne "\nHello $USER today is "; date
+echo -e "\nHello $USER today is $fg[cyan]$(date)$reset_color Week: $fg[cyan]$(date +%V)$reset_color"
 echo -ne "Uptime for this system is $fg[cyan]";uptime | awk '{print $3,$4,$5}' | sed s/.$/\ hours/    # Ulgy as fuck sed, also not working properly if uptime is < 1 day
 echo -ne "$reset_color\n"
 
