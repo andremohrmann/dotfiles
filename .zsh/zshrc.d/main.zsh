@@ -137,6 +137,9 @@ alias dsa='du -h --max-depth=0 *'
 # Get sizes of everything in current directory and show total
 alias ducks='du -cksh *'
 
+# Qiuck acces to history
+alias h='history'
+
 # Some more aliases to avoid making mistakes
 alias rm='rm -i'
 alias cp='cp -iv'
