@@ -101,6 +101,7 @@ eval "`dircolors`"
 alias ls='ls $LS_OPTIONS'
 alias ll='ls $LS_OPTIONS -l'
 alias l='ls $LS_OPTIONS -lAhF'
+alias tree='find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g''
 
 # Easy chmod
 alias 000='chmod 000'
