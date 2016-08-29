@@ -149,7 +149,8 @@ alias rm='rm -iv'
 alias cp='cp -iv'
 alias mv='mv -iv'
 
-alias colorize='colorize_via_pygmentize'
+# Add colors to output
+alias c='colorize_via_pygmentize'
 
 # Misc
 alias :q='quit'
@@ -196,8 +197,6 @@ man() {
     LESS_TERMCAP_us=$(printf "\e[1;32m") \
     man "$@"
 }
-
-alias colorize='colorize_via_pygmentize'
 
 colorize_via_pygmentize() {
     if [ ! -x "$(which pygmentize)" ]; then
