@@ -160,6 +160,9 @@ alias fuck='sudo $(fc -ln -1)'
 alias fucking='sudo '
 alias please='sudio '
 
+# Ubunto on Windows 10 (Windows Subsystem for Linux) specific
+afk='/mnt/c/Windows/System32/rundll32.exe user32.dll,LockWorkStation'		# If executing .exe files will ever work in WSL, this will lock the screen
+
 #################
 ### Functions ###
 #################
