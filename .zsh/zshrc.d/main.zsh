@@ -256,10 +256,11 @@ echo -ne "Uptime for this system is $fg[cyan]";uptime | awk '{print $3,$4,$5}' |
 echo -ne "$reset_color\n"
 
 # Get OS
-OS=$(cat /etc/*-release | sed -n 5,5p | sed 's/ID=//g')
+#OS=$(cat /etc/*-release | sed -n 5,5p | sed 's/ID=//g')
+OS=$(cat /etc/*-release | sed -n 's/.*\(PRETTY_NAME\=.*\).*/\1/p' | sed 's/PRETTY_NAME=//g' | awk '{print $1}' | sed 's/^.//')
 
 # If OS is debian print full version, if not just print the OS
-if [ $OS = "debian" ]; then
+if [ $OS = "Debian" ]; then
   echo -ne "This system is running on $fg[cyan]$(cat /etc/*-release | sed -n 's/.*\(PRETTY_NAME\=.*\).*/\1/p' | sed 's/PRETTY_NAME=//g')$reset_color Version: $fg[cyan]";cat /etc/debian_version
   echo -ne "$reset_color\n"
 else
