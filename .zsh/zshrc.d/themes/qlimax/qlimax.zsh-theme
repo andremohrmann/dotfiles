@@ -241,6 +241,26 @@ prompt_ram() {
   prompt_segment black default "Free RAM: $(printSizeHumanReadable "$ramfree" $base)" 'RAM_ICON'
 }
 
+# Ninja prompt
+ninja() {
+  RANGE=2048
+
+  number=$RANDOM
+  let "number %= $RANGE"
+  space=""
+
+  COUNTER=0
+  while [ $COUNTER -lt $number ]; do
+    space="$space  "
+    let COUNTER=COUNTER+1
+  done
+
+  PROMPT='${space}'
+  RPROMPT=''
+  precmd() { ninja }
+#  clear
+}
+
 # Right prompt
 build_rprompt() {
   prompt_time
