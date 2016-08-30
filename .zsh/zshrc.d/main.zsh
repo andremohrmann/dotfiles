@@ -48,39 +48,39 @@ setopt inc_append_history
 ##################
 
 # Make Insert, Del, Pos1, End work
-bindkey "^[[2~" yank                    # Insert
-bindkey "^[[3~" delete-char             # Del
-bindkey "^[[1~" beginning-of-line       # Pos1
-bindkey "^[[4~" end-of-line             # End
+bindkey "^[[2~" yank                # Insert
+bindkey "^[[3~" delete-char         # Del
+bindkey "^[[1~" beginning-of-line   # Pos1
+bindkey "^[[4~" end-of-line         # End
 
 # Make numpad work
-bindkey -s "^[Op" "0"   # 0
-bindkey -s "^[On" ","   # ,
-bindkey -s "^[OM" "^M"  # Enter
-bindkey -s "^[Oq" "1"   # 1
-bindkey -s "^[Or" "2"   # 2
-bindkey -s "^[Os" "3"   # 3
-bindkey -s "^[Ot" "4"   # 4
-bindkey -s "^[Ou" "5"   # 5
-bindkey -s "^[Ov" "6"   # 6
-bindkey -s "^[Ow" "7"   # 7
-bindkey -s "^[Ox" "8"   # 8
-bindkey -s "^[Oy" "9"   # 9
-bindkey -s "^[Ol" "+"   # +
-bindkey -s "^[OS" "-"   # -
-bindkey -s "^[OR" "*"   # *
-bindkey -s "^[OQ" "/"   # /
+bindkey -s "^[Op" "0"     # 0
+bindkey -s "^[On" ","     # ,
+bindkey -s "^[OM" "^M"    # Enter
+bindkey -s "^[Oq" "1"     # 1
+bindkey -s "^[Or" "2"     # 2
+bindkey -s "^[Os" "3"     # 3
+bindkey -s "^[Ot" "4"     # 4
+bindkey -s "^[Ou" "5"     # 5
+bindkey -s "^[Ov" "6"     # 6
+bindkey -s "^[Ow" "7"     # 7
+bindkey -s "^[Ox" "8"     # 8
+bindkey -s "^[Oy" "9"     # 9
+bindkey -s "^[Ol" "+"     # +
+bindkey -s "^[OS" "-"     # -
+bindkey -s "^[OR" "*"     # *
+bindkey -s "^[OQ" "/"     # /
 
 # Use up and down arrow to search history
-bindkey "^[OA" up-line-or-history       # Up arrow
-bindkey "^[OB" down-line-or-history     # Down arrow
+bindkey "^[OA" up-line-or-history   # Up arrow
+bindkey "^[OB" down-line-or-history   # Down arrow
 
 # history expansion with space
-bindkey " " magic-space                 #!command[SPACE]
+bindkey " " magic-space   #!command[SPACE]
 
 # Use PageUp and PageDown to search the history for commands that start with what has already been typed
-bindkey '^[[5~' history-beginning-search-backward       # PageUp
-bindkey '^[[6~' history-beginning-search-forward        # Page Down
+bindkey '^[[5~' history-beginning-search-backward   # PageUp
+bindkey '^[[6~' history-beginning-search-forward    # Page Down
 
 # Insert "sudo " at the beginning of the line
 function prepend-sudo {
@@ -417,8 +417,8 @@ function extract() {
       read -p "$foldername already exists, do you want to overwrite it? (y/n) " -n 1
       echo
         if [[ $REPLY =~ ^[Nn]$ ]]; then
-	  return
-	fi
+    return
+  fi
     fi
     mkdir -p "$foldername" && cd "$foldername"
     case $1 in
