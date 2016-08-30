@@ -159,7 +159,7 @@ alias :q='quit'
 # 4 teh lulz
 alias fuck='sudo $(fc -ln -1)'
 alias fucking='sudo '
-alias please='sudio '
+alias please='sudo '
 alias weather='curl -4 http://wttr.in/Bielefeld'
 
 # Ubunto on Windows 10 (Windows Subsystem for Linux) specific
