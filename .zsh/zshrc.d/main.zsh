@@ -48,39 +48,39 @@ setopt inc_append_history
 ##################
 
 # Make Insert, Del, Pos1, End work
-bindkey "^[[2~" yank                    # Insert
-bindkey "^[[3~" delete-char             # Del
-bindkey "^[[1~" beginning-of-line       # Pos1
-bindkey "^[[4~" end-of-line             # End
+bindkey "^[[2~" yank                # Insert
+bindkey "^[[3~" delete-char         # Del
+bindkey "^[[1~" beginning-of-line   # Pos1
+bindkey "^[[4~" end-of-line         # End
 
 # Make numpad work
-bindkey -s "^[Op" "0"   # 0
-bindkey -s "^[On" ","   # ,
-bindkey -s "^[OM" "^M"  # Enter
-bindkey -s "^[Oq" "1"   # 1
-bindkey -s "^[Or" "2"   # 2
-bindkey -s "^[Os" "3"   # 3
-bindkey -s "^[Ot" "4"   # 4
-bindkey -s "^[Ou" "5"   # 5
-bindkey -s "^[Ov" "6"   # 6
-bindkey -s "^[Ow" "7"   # 7
-bindkey -s "^[Ox" "8"   # 8
-bindkey -s "^[Oy" "9"   # 9
-bindkey -s "^[Ol" "+"   # +
-bindkey -s "^[OS" "-"   # -
-bindkey -s "^[OR" "*"   # *
-bindkey -s "^[OQ" "/"   # /
+bindkey -s "^[Op" "0"     # 0
+bindkey -s "^[On" ","     # ,
+bindkey -s "^[OM" "^M"    # Enter
+bindkey -s "^[Oq" "1"     # 1
+bindkey -s "^[Or" "2"     # 2
+bindkey -s "^[Os" "3"     # 3
+bindkey -s "^[Ot" "4"     # 4
+bindkey -s "^[Ou" "5"     # 5
+bindkey -s "^[Ov" "6"     # 6
+bindkey -s "^[Ow" "7"     # 7
+bindkey -s "^[Ox" "8"     # 8
+bindkey -s "^[Oy" "9"     # 9
+bindkey -s "^[Ol" "+"     # +
+bindkey -s "^[OS" "-"     # -
+bindkey -s "^[OR" "*"     # *
+bindkey -s "^[OQ" "/"     # /
 
 # Use up and down arrow to search history
-bindkey "^[OA" up-line-or-history       # Up arrow
-bindkey "^[OB" down-line-or-history     # Down arrow
+bindkey "^[OA" up-line-or-history   # Up arrow
+bindkey "^[OB" down-line-or-history   # Down arrow
 
 # history expansion with space
-bindkey " " magic-space                 #!command[SPACE]
+bindkey " " magic-space   #!command[SPACE]
 
 # Use PageUp and PageDown to search the history for commands that start with what has already been typed
-bindkey '^[[5~' history-beginning-search-backward       # PageUp
-bindkey '^[[6~' history-beginning-search-forward        # Page Down
+bindkey '^[[5~' history-beginning-search-backward   # PageUp
+bindkey '^[[6~' history-beginning-search-forward    # Page Down
 
 # Insert "sudo " at the beginning of the line
 function prepend-sudo {
@@ -167,7 +167,7 @@ alias please='sudo '
 alias weather='curl -4 http://wttr.in/Bielefeld'
 
 # Ubunto on Windows 10 (Windows Subsystem for Linux) specific
-afk='/mnt/c/Windows/System32/rundll32.exe user32.dll,LockWorkStation'		# If executing .exe files will ever work in WSL, this will lock the screen
+afk='/mnt/c/Windows/System32/rundll32.exe user32.dll,LockWorkStation'    # If executing .exe files will ever work in WSL, this will lock the screen
 
 #################
 ### Functions ###
@@ -235,7 +235,7 @@ colorize_via_pygmentize() {
 DIRSTACKFILE="$HOME/.zsh/cache/dirs"
 if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
   dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
-#  [[ -d $dirstack[1] ]] && cd $dirstack[1] # Return to last directory after reconnect
+#  [[ -d $dirstack[1] ]] && cd $dirstack[1]    # Return to last directory after reconnect
 fi
 chpwd() {
   print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
@@ -398,7 +398,14 @@ else
 fi
 
 function all_the_colors {
-  for x in 0 1 4 5 7 8; do for i in `seq 30 37`; do for a in `seq 40 47`; do echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; done; echo; done; done; echo "";
+  for x in 0 1 4 5 7 8; do 
+    for i in `seq 30 37`; do 
+      for a in `seq 40 47`; do 
+        echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; 
+      done; echo; 
+    done; 
+  done; 
+  echo "";
 }
 
 # Extract archives - use: extract <file>
@@ -413,8 +420,8 @@ function extract() {
       read -p "$foldername already exists, do you want to overwrite it? (y/n) " -n 1
       echo
         if [[ $REPLY =~ ^[Nn]$ ]]; then
-	  return
-	fi
+    return
+  fi
     fi
     mkdir -p "$foldername" && cd "$foldername"
     case $1 in
