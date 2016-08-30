@@ -153,6 +153,9 @@ alias mv='mv -iv'
 # Add colors to output
 alias c='colorize_via_pygmentize'
 
+# Resume wget by default
+alias wget='wget -c'
+
 # Misc
 alias :q='quit'
 alias sudo='sudo '
