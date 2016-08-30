@@ -19,7 +19,7 @@ export TERM="xterm-256color"
 ###############
 
 if [ -z "$HISTFILE" ]; then
-    HISTFILE=$HOME/.zsh/.zsh_history
+  HISTFILE=$HOME/.zsh/.zsh_history
 fi
 
 HISTSIZE=10000
@@ -178,14 +178,13 @@ function cdl {
 # Make directory and cd into in
 mcd()
 {
-    test -d "$1" || mkdir "$1" && cd "$1"
+  test -d "$1" || mkdir "$1" && cd "$1"
 }
 
 # Move up multiple directories
 function up {
   ups=""
-  for i in $(seq 1 $1)
-  do
+  for i in $(seq 1 $1); do
     ups=$ups"../"
   done
   cd $ups
@@ -205,25 +204,24 @@ man() {
 }
 
 colorize_via_pygmentize() {
-    if [ ! -x "$(which pygmentize)" ]; then
-        echo "package \'pygmentize\' is not installed!"
-        return -1
-    fi
+  if [ ! -x "$(which pygmentize)" ]; then
+    echo "package \'pygmentize\' is not installed!"
+    return -1
+  fi
 
-    if [ $# -eq 0 ]; then
-        pygmentize -g $@
-    fi
+  if [ $# -eq 0 ]; then
+    pygmentize -g $@
+  fi
 
-    for FNAME in $@
-    do
-        filename=$(basename "$FNAME")
-        lexer=`pygmentize -N \"$filename\"`
-        if [ "Z$lexer" != "Ztext" ]; then
-            pygmentize -l $lexer "$FNAME"
-        else
-            pygmentize -g "$FNAME"
-        fi
-    done
+  for FNAME in $@; do
+      filename=$(basename "$FNAME")
+      lexer=`pygmentize -N \"$filename\"`
+      if [ "Z$lexer" != "Ztext" ]; then
+        pygmentize -l $lexer "$FNAME"
+      else
+        pygmentize -g "$FNAME"
+      fi
+  done
 }
 
 ##################
@@ -361,18 +359,18 @@ compctl -M '' 'm:{a-zA-Z}={A-Za-z}'
 
 
 function most_useless_use_of_zsh {
-   local lines columns colour a b p q i pnew
-   ((columns=COLUMNS-1, lines=LINES-1, colour=0))
-   for ((b=-1.5; b<=1.5; b+=3.0/lines)) do
-       for ((a=-2.0; a<=1; a+=3.0/columns)) do
-           for ((p=0.0, q=0.0, i=0; p*p+q*q < 4 && i < 32; i++)) do
-               ((pnew=p*p-q*q+a, q=2*p*q+b, p=pnew))
-           done
-           ((colour=(i/4)%8))
-            echo -n "\\e[4${colour}m "
-        done
-        echo
+  local lines columns colour a b p q i pnew
+  ((columns=COLUMNS-1, lines=LINES-1, colour=0))
+  for ((b=-1.5; b<=1.5; b+=3.0/lines)); do
+    for ((a=-2.0; a<=1; a+=3.0/columns)); do
+      for ((p=0.0, q=0.0, i=0; p*p+q*q < 4 && i < 32; i++)); do
+        ((pnew=p*p-q*q+a, q=2*p*q+b, p=pnew))
+      done
+      ((colour=(i/4)%8))
+      echo -n "\\e[4${colour}m "
     done
+    echo
+  done
 }
 
 # Random quote
@@ -383,18 +381,17 @@ COLON_COLOR="\e[0;35m"
 END_COLOR="\e[m"
 
 if [[ -x `which curl` ]]; then
-    function quote()
-    {
-        Q=$(curl -s --connect-timeout 2 "http://www.quotationspage.com/random.php3" | iconv -c -f ISO-8859-1 -t UTF-8 | grep -m 1 "dt ")
-        TXT=$(echo "$Q" | sed -e 's/<\/dt>.*//g' -e 's/.*html//g' -e 's/^[^a-zA-Z]*//' -e 's/<\/a..*$//g')
-        W=$(echo "$Q" | sed -e 's/.*\/quotes\///g' -e 's/<.*//g' -e 's/.*">//g')
-        if [ "$W" -a "$TXT" ]; then
-          echo "${WHO_COLOR}${W}${COLON_COLOR}: ${TEXT_COLOR}“${TXT}”${END_COLOR}"
-        fi
-    }
-    #quote
+  function quote() {
+    Q=$(curl -s --connect-timeout 2 "http://www.quotationspage.com/random.php3" | iconv -c -f ISO-8859-1 -t UTF-8 | grep -m 1 "dt ")
+    TXT=$(echo "$Q" | sed -e 's/<\/dt>.*//g' -e 's/.*html//g' -e 's/^[^a-zA-Z]*//' -e 's/<\/a..*$//g')
+    W=$(echo "$Q" | sed -e 's/.*\/quotes\///g' -e 's/<.*//g' -e 's/.*">//g')
+    if [ "$W" -a "$TXT" ]; then
+      echo "${WHO_COLOR}${W}${COLON_COLOR}: ${TEXT_COLOR}“${TXT}”${END_COLOR}"
+    fi
+  }
+#quote
 else
-    echo "Quote function needs curl to work..." >&2
+  echo "Quote function needs curl to work..." >&2
 fi
 
 function all_the_colors {
@@ -403,38 +400,38 @@ function all_the_colors {
 
 # Extract archives - use: extract <file>
 function extract() {
-	if [ -f "$1" ] ; then
-		local filename=$(basename "$1")
-		local foldername="${filename%%.*}"
-		local fullpath=`perl -e 'use Cwd "abs_path";print abs_path(shift)' "$1"`
-		local didfolderexist=false
-		if [ -d "$foldername" ]; then
-			didfolderexist=true
-			read -p "$foldername already exists, do you want to overwrite it? (y/n) " -n 1
-			echo
-			if [[ $REPLY =~ ^[Nn]$ ]]; then
-				return
-			fi
-		fi
-		mkdir -p "$foldername" && cd "$foldername"
-		case $1 in
-			*.tar.bz2) tar xjf "$fullpath" ;;
-			*.tar.gz) tar xzf "$fullpath" ;;
-			*.tar.xz) tar Jxvf "$fullpath" ;;
-			*.tar.Z) tar xzf "$fullpath" ;;
-			*.tar) tar xf "$fullpath" ;;
-			*.taz) tar xzf "$fullpath" ;;
-			*.tb2) tar xjf "$fullpath" ;;
-			*.tbz) tar xjf "$fullpath" ;;
-			*.tbz2) tar xjf "$fullpath" ;;
-			*.tgz) tar xzf "$fullpath" ;;
-			*.txz) tar Jxvf "$fullpath" ;;
-			*.zip) unzip "$fullpath" ;;
-			*) echo "'$1' cannot be extracted via extract()" && cd .. && ! $didfolderexist && rm -r "$foldername" ;;
-		esac
-	else
-		echo "'$1' is not a valid file"
+  if [ -f "$1" ] ; then
+    local filename=$(basename "$1")
+    local foldername="${filename%%.*}"
+    local fullpath=`perl -e 'use Cwd "abs_path";print abs_path(shift)' "$1"`
+    local didfolderexist=false
+    if [ -d "$foldername" ]; then
+      didfolderexist=true
+      read -p "$foldername already exists, do you want to overwrite it? (y/n) " -n 1
+      echo
+        if [[ $REPLY =~ ^[Nn]$ ]]; then
+	  return
 	fi
+    fi
+    mkdir -p "$foldername" && cd "$foldername"
+    case $1 in
+      *.tar.bz2) tar xjf "$fullpath" ;;
+      *.tar.gz) tar xzf "$fullpath" ;;
+      *.tar.xz) tar Jxvf "$fullpath" ;;
+      *.tar.Z) tar xzf "$fullpath" ;;
+      *.tar) tar xf "$fullpath" ;;
+      *.taz) tar xzf "$fullpath" ;;
+      *.tb2) tar xjf "$fullpath" ;;
+      *.tbz) tar xjf "$fullpath" ;;
+      *.tbz2) tar xjf "$fullpath" ;;
+      *.tgz) tar xzf "$fullpath" ;;
+      *.txz) tar Jxvf "$fullpath" ;;
+      *.zip) unzip "$fullpath" ;;
+      *) echo "'$1' cannot be extracted via extract()" && cd .. && ! $didfolderexist && rm -r "$foldername" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
 }
 
 
