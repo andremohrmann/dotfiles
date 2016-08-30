@@ -193,6 +193,11 @@ function up {
   cd $ups
 }
 
+# Make backups
+bu() { 
+  cp $@ $@.backup-`date +%y%m%d`; echo "`date +%Y-%m-%d` backed up $PWD/$@" >> ~/.backups.log;
+}
+
 # Colorized manuals
 man() {
   env \
