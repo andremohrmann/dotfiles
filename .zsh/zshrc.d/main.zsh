@@ -155,6 +155,7 @@ alias c='colorize_via_pygmentize'
 
 # Misc
 alias :q='quit'
+alias sudo='sudo '
 
 # 4 teh lulz
 alias fuck='sudo $(fc -ln -1)'
