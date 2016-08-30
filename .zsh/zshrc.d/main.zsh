@@ -195,7 +195,7 @@ function up {
 
 # Make backups
 bu() { 
-  cp $@ $@.backup-`date +%y%m%d`; echo "`date +%Y-%m-%d` backed up $PWD/$@" >> ~/.backups.log;
+  cp "$@" "$@".bu-`date +%Y%m%d-%H%M`; echo "`date +%Y-%m-%d_%H:%M` backed up $PWD/$@" >> ~/.backups.log;
 }
 
 # Colorized manuals
