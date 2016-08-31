@@ -11,6 +11,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-sy
 mkdir ~/.zsh/cache/
 touch ~/.zsh/cache/dirs
 chsh -s $(which zsh)
+(crontab -l ; echo "0 4 * * * sh ~/dotfiles/.zsh/update.sh") | crontab -
 ```
 
 Login again
