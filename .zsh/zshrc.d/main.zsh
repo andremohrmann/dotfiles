@@ -276,9 +276,12 @@ if [ $OS = "Debian" ]; then
   echo -ne "This system is running on $fg[cyan]$(cat /etc/*-release | sed -n 's/.*\(PRETTY_NAME\=.*\).*/\1/p' | sed 's/PRETTY_NAME=//g')$reset_color Version: $fg[cyan]";cat /etc/debian_version
   echo -ne "$reset_color\n"
 else
-  echo -ne "This system is running on $fg[cyan]";cat /etc/*-release | sed -n 's/.*\(PRETTY_NAME\=.*\).*/\1/p' | sed 's/PRETTY_NAME=//g'
+  echo -ne "This system is running on $fg[cyan]$(cat /etc/*-release | sed -n 's/.*\(PRETTY_NAME\=.*\).*/\1/p' | sed 's/PRETTY_NAME=//g')"
   echo -ne "$reset_color\n"
 fi
+
+echo -ne "This system has the following IP: $fg[cyan]$(ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1' | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n/ /g')"
+echo -e "$reset_color\n"
 
 ############
 ### Misc ###
