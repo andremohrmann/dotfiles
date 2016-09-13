@@ -159,6 +159,7 @@ alias wget='wget -c'
 # Misc
 alias :q='quit'
 alias sudo='sudo '
+alias server='service'
 
 # 4 teh lulz
 alias fuck='sudo $(fc -ln -1)'
