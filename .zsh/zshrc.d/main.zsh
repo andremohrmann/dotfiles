@@ -109,6 +109,7 @@ alias 644='chmod 644'
 alias 664='chmod 664'
 alias 755='chmod 755'
 alias 775='chmod 775'
+alias xx='chmod +x'
 
 # Recursively find all files/directories in current directory and chmod them
 alias findf='find . -type f -exec chmod 664 {} \;'
