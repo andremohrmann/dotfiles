@@ -200,6 +200,10 @@ bu() {
   cp "$@" "$@".bu-`date +%Y%m%d-%H%M`; echo "`date +%Y-%m-%d_%H:%M` backed up $PWD/$@" >> ~/.backups.log;
 }
 
+ip() {
+  ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1' | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n/ /g'
+}
+
 # Colorized manuals
 man() {
   env \
