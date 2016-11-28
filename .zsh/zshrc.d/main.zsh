@@ -183,7 +183,7 @@ function cdl {
 # Make directory and cd into in
 mcd()
 {
-  test -d "$1" || mkdir "$1" && cd "$1"
+  test -d "$1" || mkdir -p "$1" && cd "$1"
 }
 
 # Move up multiple directories
