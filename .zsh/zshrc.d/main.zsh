@@ -134,10 +134,10 @@ alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 # Get directory size
 alias ds='du -h --max-depth=0 $1' # requires one input
 
-# Get directory size of every folder in current directory
+# Get directory size of every item in current directory
 alias dsa='du -h --max-depth=0 *'
 
-# Get sizes of everything in current directory and show total
+# Get sizes of everything in current directory and show total, sort by size
 alias ducks='du -cksh * | sort -h'
 
 # Commonly used commands
