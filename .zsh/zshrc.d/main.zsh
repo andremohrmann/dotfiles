@@ -138,7 +138,7 @@ alias ds='du -h --max-depth=0 $1' # requires one input
 alias dsa='du -h --max-depth=0 *'
 
 # Get sizes of everything in current directory and show total
-alias ducks='du -cksh *'
+alias ducks='du -cksh * | sort -h'
 
 # Commonly used commands
 alias psa="ps aux"
