@@ -180,7 +180,7 @@ afk='/mnt/c/Windows/System32/rundll32.exe user32.dll,LockWorkStation'    # If ex
 #################
 
 # List directory after changeing into it
-function cdl {
+function lcd {
   cd "$@" && l
 }
 
