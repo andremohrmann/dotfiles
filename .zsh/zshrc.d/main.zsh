@@ -290,8 +290,10 @@ else
   echo -ne "$reset_color\n"
 fi
 
-echo -ne "This system has the following IP: $fg[cyan]$(ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1' | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n/ /g')"
-echo -e "$reset_color\n"
+if [ $UID -eq 0 ]; then
+  echo -ne "This system has the following IP: $fg[cyan]$(ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1' | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n/ /g')"
+  echo -e "$reset_color\n"
+fi
 
 ############
 ### Misc ###
