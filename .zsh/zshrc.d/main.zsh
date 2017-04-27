@@ -82,14 +82,14 @@ bindkey " " magic-space   #!command[SPACE]
 bindkey '^[[5~' history-beginning-search-backward   # PageUp
 bindkey '^[[6~' history-beginning-search-forward    # Page Down
 
-# Insert "sudo " at the beginning of the line
+# "Alt + s" inserts "sudo " at the beginning of the line
 function prepend-sudo {
   if [[ $BUFFER != "sudo "* ]]; then
     BUFFER="sudo $BUFFER"; CURSOR+=5
   fi
 }
 zle -N prepend-sudo
-bindkey "^[s" prepend-sudo
+bindkey "^[s" prepend-sudo # Alt + s
 
 ###############
 ### Aliases ###
@@ -273,7 +273,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 ####################
 
 # Print date, time and uptime
-echo -e "\nHello $USER today is $fg[cyan]$(date)$reset_color Week: $fg[cyan]$(date +%V)$reset_color"
+echo -e "\nHello $USER! Today is $fg[cyan]$(date)$reset_color Week: $fg[cyan]$(date +%V)$reset_color"
 echo -ne "Uptime for this system is $fg[cyan]";uptime | awk '{print $3,$4,$5}' | sed s/.$/\ hours/    # Ulgy as fuck sed, also not working properly if uptime is < 1 day
 echo -ne "$reset_color\n"
 
