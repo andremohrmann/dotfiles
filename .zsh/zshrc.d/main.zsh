@@ -166,6 +166,9 @@ alias :q='quit'
 alias sudo='sudo '
 #alias server='service'
 
+# Mitigate typos
+alias catr='cat'
+
 # 4 teh lulz
 alias fuck='sudo $(fc -ln -1)'
 alias fucking='sudo '
