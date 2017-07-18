@@ -142,13 +142,14 @@ alias ducks='du -cksh * | sort -h'
 
 # Commonly used commands
 alias psa="ps aux"
-alias psg="ps aux | grep "
+alias psag="ps aux | grep "
 alias t='tail -f -n 20000'
 alias ml='tail -f /var/log/mail.log -n 2000'
 alias mlg='cat /var/log/mail.log | grep $1'
 alias al='tail -f /var/log/auth.log -n 2000'
 alias alg='cat /var/log/auth.log | grep $1'
 alias h='history'
+alias hg='history | grep'
 
 # Some more aliases to avoid making mistakes
 alias rm='rm -iv'
@@ -175,7 +176,7 @@ alias fucking='sudo '
 alias please='sudo '
 alias weather='curl -4 http://wttr.in/Bielefeld'
 
-# Ubunto on Windows 10 (Windows Subsystem for Linux) specific
+# Ubuntu on Windows 10 (Windows Subsystem for Linux) specific
 afk='/mnt/c/Windows/System32/rundll32.exe user32.dll,LockWorkStation'    # If executing .exe files will ever work in WSL, this will lock the screen
 
 #################
@@ -207,6 +208,7 @@ bu() {
   cp "$@" "$@".bu-`date +%Y%m%d-%H%M`; echo "`date +%Y-%m-%d_%H:%M` backed up $PWD/$@" >> ~/.backups.log;
 }
 
+# Show IPs (deprecated/bugged in debian stretch)
 ip() {
   ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1' | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n/ /g'
 }
