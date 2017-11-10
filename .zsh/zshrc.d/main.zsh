@@ -102,6 +102,7 @@ alias ls='ls $LS_OPTIONS'
 alias ll='ls $LS_OPTIONS -l'
 alias l='ls $LS_OPTIONS -lAhF'
 alias tree='find . -print | sed -e "s;[^/]*/;|____;g;s;____|; |;g"'
+alias inodes='find / -xdev -printf '%h\n' | sort | uniq -c | sort -k 1 -n'
 
 # Easy chmod
 alias 000='chmod 000'
