@@ -418,7 +418,7 @@ if [[ -x `which curl` ]]; then
       echo "${WHO_COLOR}${W}${COLON_COLOR}: ${TEXT_COLOR}“${TXT}”${END_COLOR}"
     fi
   }
-#quote
+
 else
   echo "Quote function needs curl to work..." >&2
 fi
