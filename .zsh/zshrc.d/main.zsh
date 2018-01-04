@@ -209,10 +209,18 @@ bu() {
   cp "$@" "$@".bu-`date +%Y%m%d-%H%M`; echo "`date +%Y-%m-%d_%H:%M` backed up $PWD/$@" >> ~/.backups.log;
 }
 
-# Show IPs (deprecated/bugged in debian stretch)
-ip() {
-  ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1' | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n/ /g'
-}
+# Show IPs
+#if ( expr $VER_ID \<= 9 >/dev/null ); then # Check if version is older than stretch
+#if [ $(dpkg-query -W -f='${Status}' ifconfig 2>/dev/null | grep -c "ok installed") -eq 0 ]; then # check if package ifconfig is installed
+if [ -x "$( command -v ifconfig )" ]; then # Check if command ifconfig is available
+  ip() {
+    ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1' | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n/ /g'
+  }
+else
+  ip() {
+    ip addr | grep "inet\b" | awk '{print $2}' | cut -d/ -f1 | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n//g'
+  }
+fi
 
 # Colorized manuals
 man() {
@@ -285,11 +293,48 @@ echo -ne "$reset_color\n"
 
 # Get OS
 #OS=$(cat /etc/*-release | sed -n 5,5p | sed 's/ID=//g')
-OS=$(cat /etc/*-release | sed -n 's/.*\(PRETTY_NAME\=.*\).*/\1/p' | sed 's/PRETTY_NAME=//g' | awk '{print $1}' | sed 's/^.//')
+#OS=$(cat /etc/*-release | sed -n 's/.*\(PRETTY_NAME\=.*\).*/\1/p' | sed 's/PRETTY_NAME=//g' | awk '{print $1}' | sed 's/^.//')
+
+OS=""
+VER=""
+VER_ID=""
+
+if [ -f /etc/os-release ]; then
+  # freedesktop.org and systemd
+  . /etc/os-release
+  OS=$NAME
+  VER=$VERSION
+  VER_ID=$VERSION_ID
+  # Debian specific stuff
+  if [ "$OS" = "Debian GNU/Linux" ]; then
+    OS=$(echo $OS | awk '{print $1}')
+    read _ VER <<< "$VERSION"
+    VER=$(echo $VER | sed 's/^.\(.*\).$/\1/')
+  fi
+elif type lsb_release >/dev/null 2>&1; then
+  # linuxbase.org
+  OS=$(lsb_release -si)
+  VER=$(lsb_release -sc)
+  VER_ID=$(lsb_release -sr)
+elif [ -f /etc/lsb-release ]; then
+  # For some versions of Debian/Ubuntu without lsb_release command
+  . /etc/lsb-release
+  OS=$DISTRIB_ID
+  VER=$DISTRIB_CODENAME
+  VER_ID=$DISTRIB_RELEASE
+elif [ -f /etc/debian_version ]; then
+  # Older Debian/Ubuntu/etc.
+  OS=Debian
+  VER_ID=$(cat /etc/debian_version)
+else
+  # Fall back to uname, e.g. "Linux <version>", also works for BSD, etc.
+  OS=$(uname -s)
+  VER=$(uname -r)
+fi
 
 # If OS is debian print full version, if not just print the OS
 if [ $OS = "Debian" ]; then
-  echo -ne "This system is running on $fg[cyan]$(cat /etc/*-release | sed -n 's/.*\(PRETTY_NAME\=.*\).*/\1/p' | sed 's/PRETTY_NAME=//g')$reset_color Version: $fg[cyan]";cat /etc/debian_version
+  echo -ne "This system is running on $fg[cyan]$(cat /etc/*-release | sed -n 's/.*\(PRETTY_NAME\=.*\).*/\1/p' | sed 's/PRETTY_NAME=//g')$reset_color Version: $fg[cyan]";lsb_release -sr
   echo -ne "$reset_color\n"
 else
   echo -ne "This system is running on $fg[cyan]$(cat /etc/*-release | sed -n 's/.*\(PRETTY_NAME\=.*\).*/\1/p' | sed 's/PRETTY_NAME=//g')"
@@ -297,7 +342,7 @@ else
 fi
 
 if [ $UID -eq 0 ]; then
-  echo -ne "This system has the following IP: $fg[cyan]$(ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1' | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n/ /g')"
+  echo -ne "This system has the following IP: "$fg[cyan]$(ip)
   echo -e "$reset_color\n"
 fi
 
