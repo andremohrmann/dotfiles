@@ -117,8 +117,7 @@ alias findf='find . -type f -exec chmod 664 {} \;'
 alias findd='find . -type d -exec chmod 775 {} \;'
 
 # grep beautification
-export GREP_OPTIONS="--colour=auto"
-alias grep='grep $GREP_OPTIONS'
+alias grep='grep --color=auto'
 
 # Navigation aliases
 alias ..='cd ..'
