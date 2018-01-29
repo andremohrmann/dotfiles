@@ -143,7 +143,7 @@ alias ducks='du -cksh * | sort -h'
 # Commonly used commands
 alias psa="ps aux"
 alias psag="ps aux | grep "
-alias t='tail -f -n 20000'
+alias t='tail -f -n 2000'
 alias ml='tail -f /var/log/mail.log -n 2000'
 alias mlg='cat /var/log/mail.log | grep $1'
 alias al='tail -f /var/log/auth.log -n 2000'
