@@ -204,8 +204,15 @@ function up {
 }
 
 # Make backups
-bu() { 
-  cp "$@" "$@".bu-`date +%Y%m%d-%H%M`; echo "`date +%Y-%m-%d_%H:%M` backed up $PWD/$@" >> ~/.backups.log;
+bu() {
+  if [[ -d $@ ]]; then
+    tar czf "$@"_bu-`date +%Y%m%d-%H%M`.tar.gz "$@"; echo "`date +%Y-%m-%d_%H:%M` backed up $PWD/$@" >> ~/.backups.log;
+  elif [[ -f $@ ]]; then
+    cp "$@" "$@".bu-`date +%Y%m%d-%H%M`; echo "`date +%Y-%m-%d_%H:%M` backed up $PWD/$@" >> ~/.backups.log;
+  else
+    echo "$@ is not valid"
+    exit 1
+  fi
 }
 
 # Show IPs
