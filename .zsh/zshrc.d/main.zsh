@@ -224,7 +224,7 @@ if [ -x "$( command -v ifconfig )" ]; then # Check if command ifconfig is availa
   }
 else
   ip() {
-    command ip addr | grep "inet\b" | awk '{print $2}' | cut -d/ -f1 | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n//g'
+    command ip addr | grep "inet\b" | awk '{print $2}' | cut -d/ -f1 | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n/ /g'
   }
 fi
 
