@@ -151,6 +151,14 @@ alias alg='cat /var/log/auth.log | grep $1'
 alias h='history'
 alias hg='history | grep'
 
+# docker related
+alias dps="docker ps"
+alias dpstop="watch -n 1 -d docker ps"
+alias dsa="docker stop $(docker ps -a -q)"
+alias drm="docker rm $(docker ps -a -q)"
+
+# git related
+
 # Some more aliases to avoid making mistakes
 alias rm='rm -iv'
 alias cp='cp -iv'
