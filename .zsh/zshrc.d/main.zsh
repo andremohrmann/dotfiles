@@ -153,6 +153,7 @@ alias hg='history | grep'
 
 # docker related
 alias dps="docker ps"
+alias dtop="watch -n 1 docker ps"
 alias dpstop="watch -n 1 docker ps"
 alias dpsg="docker ps | grep "
 alias dsa="docker stop $(docker ps -a -q)"
