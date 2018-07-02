@@ -159,7 +159,7 @@ alias dpsg="docker ps | grep "
 alias dsa="docker stop $(docker ps -a -q)"
 function de(){ docker exec -it "$1" "$2"; }
 function deb(){ docker exec -it "$1" bash; }
-function dem(){ docker exec -it "$1" mysql; }
+function dem(){ docker exec -it "$1" mysql -p; }
 alias drm="docker rm $(docker ps -a -q)"
 
 # git related
