@@ -157,11 +157,11 @@ alias dps="docker ps"
 alias dtop="watch -n 1 docker ps"
 alias dpstop="watch -n 1 docker ps"
 alias dpsg="docker ps | grep "
-alias dsa="docker stop $(docker ps -a -q)"
+function dsa(){ docker stop "$(docker ps -a -q)"; }
 function de(){ docker exec -it "$1" "$2"; }
 function deb(){ docker exec -it "$1" bash; }
 function dem(){ docker exec -it "$1" mysql -p; }
-alias drm="docker rm $(docker ps -a -q)"
+function drm(){ docker rm "$(docker ps -a -q)" }
 fi
 
 # git related
