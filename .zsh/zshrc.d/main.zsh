@@ -150,6 +150,7 @@ alias al='tail -f /var/log/auth.log -n 2000'
 alias alg='cat /var/log/auth.log | grep $1'
 alias h='history'
 alias hg='history | grep'
+alias mkdir='mkdir -p'
 
 # docker related
 if which docker >/dev/null; then
