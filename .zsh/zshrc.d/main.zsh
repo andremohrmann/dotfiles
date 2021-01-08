@@ -154,10 +154,10 @@ alias mkdir='mkdir -p'
 
 # docker related
 if which docker >/dev/null; then
-alias dps="docker ps"
-alias dtop="watch -n 1 docker ps"
-alias dpstop="watch -n 1 docker ps"
-alias dpsg="docker ps | grep "
+alias dps="docker ps --all --no-trunc"
+alias dtop="watch -n 1 docker ps --no-trunc"
+alias dpstop="watch -n 1 docker ps --no-trunc"
+alias dpsg="docker ps --all --no-trunc| grep "
 function dsa(){ docker stop $(docker ps -a -q); }
 function de(){ docker exec -it "$1" "$2"; }
 function deb(){ docker exec -it "$1" bash; }
