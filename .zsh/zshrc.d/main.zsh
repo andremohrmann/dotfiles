@@ -367,7 +367,7 @@ else
 fi
 
 if [ $UID -eq 0 ]; then
-  echo -ne "This system has the following public IP: "$fg[cyan]$(dig +short myip.opendns.com @resolver1.opendns.com)$reset_color
+  echo -ne "This system has the following public IP: "$fg[cyan]$(dig +short myip.opendns.com @resolver1.opendns.com)"$reset_color\n"
   echo -ne "This system has the following internal IP: "$fg[cyan]$(ipp)
   echo -e "$reset_color\n"
 fi
