@@ -234,18 +234,23 @@ bu() {
   fi
 }
 
-# Show IPs
+# Show local IP
 #if ( expr $VER_ID \<= 9 >/dev/null ); then # Check if version is older than stretch
 #if [ $(dpkg-query -W -f='${Status}' ifconfig 2>/dev/null | grep -c "ok installed") -eq 0 ]; then # check if package ifconfig is installed
 if [ -x "$( command -v ifconfig )" ]; then # Check if command ifconfig is available
-  ipp() {
+  ipl() {
     ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1' | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n/ /g'
   }
 else
-  ipp() {
+  ipl() {
     command ip addr | grep "inet\b" | awk '{print $2}' | cut -d/ -f1 | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n/ /g'
   }
 fi
+
+Show public IP
+ipp() {
+  dig +short myip.opendns.com @resolver1.opendns.com
+}
 
 # Colorized manuals
 man() {
@@ -368,7 +373,7 @@ fi
 
 if [ $UID -eq 0 ]; then
   echo -ne "This system has the following public IP: "$fg[cyan]$(dig +short myip.opendns.com @resolver1.opendns.com)"$reset_color\n"
-  echo -ne "This system has the following internal IP: "$fg[cyan]$(ipp)
+  echo -ne "This system has the following internal IP: "$fg[cyan]$(ipl)
   echo -e "$reset_color\n"
 fi
 
