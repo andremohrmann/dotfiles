@@ -238,11 +238,11 @@ bu() {
 #if ( expr $VER_ID \<= 9 >/dev/null ); then # Check if version is older than stretch
 #if [ $(dpkg-query -W -f='${Status}' ifconfig 2>/dev/null | grep -c "ok installed") -eq 0 ]; then # check if package ifconfig is installed
 if [ -x "$( command -v ifconfig )" ]; then # Check if command ifconfig is available
-  ip() {
+  ipp() {
     ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1' | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n/ /g'
   }
 else
-  ip() {
+  ipp() {
     command ip addr | grep "inet\b" | awk '{print $2}' | cut -d/ -f1 | sed 's/127.0.0.1//g' | sed ':a;N;$!ba;s/\n/ /g'
   }
 fi
@@ -367,7 +367,8 @@ else
 fi
 
 if [ $UID -eq 0 ]; then
-  echo -ne "This system has the following IP: "$fg[cyan]$(ip)
+  echo -ne "This system has the following public IP: "$fg[cyan]$(dig +short myip.opendns.com @resolver1.opendns.com)$reset_color
+  echo -ne "This system has the following internal IP:" $fg[cyan]$(ip)
   echo -e "$reset_color\n"
 fi
 
