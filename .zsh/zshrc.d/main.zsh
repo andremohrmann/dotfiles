@@ -247,7 +247,7 @@ else
   }
 fi
 
-Show public IP
+# Show public IP
 ipp() {
   dig +short myip.opendns.com @resolver1.opendns.com
 }
